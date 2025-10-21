@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="mb-0">{{ esEdicion ? 'Editar Facultad' : 'Nueva Facultad' }}</h4>
+  </div>
+  <div class="card-body">
+    <div *ngIf="loading" class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2">{{ esEdicion ? 'Cargando facultad...' : 'Guardando facultad...' }}</p>
+    </div>
+
+    <div *ngIf="!loading">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre *</label>
+        <input type="text" class="form-control" id="nombre" 
+               [(ngModel)]="nombre" 
+               [class.is-invalid]="!nombre.trim() && formSubmitted">
+        <div class="invalid-feedback" *ngIf="!nombre.trim() && formSubmitted">
+          El nombre es requerido
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" 
+                  [(ngModel)]="descripcion" rows="3"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="ubicacion" class="form-label">Ubicación</label>
+        <input type="text" class="form-control" id="ubicacion" 
+               [(ngModel)]="ubicacion">
+      </div>
+
+      <div class="mb-3">
+        <label for="decano" class="form-label">Decano</label>
+        <input type="text" class="form-control" id="decano" 
+               [(ngModel)]="decano">
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">
+          {{ esEdicion ? 'Actualizar' : 'Guardar' }}
+        </button>
+        <button type="button" class="btn btn-secondary" routerLink="/facultades">
+          Cancelar
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger mt-3">
+      {{ error }}
+    </div>
+  </div>
+</div>
