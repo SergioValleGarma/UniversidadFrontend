@@ -1,0 +1,15 @@
+services:
+  universidad-front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    container_name: universidad-frontend
+    restart: unless-stopped
+    networks:
+      - universidad-network
+
+networks:
+  universidad-network:
+    driver: bridge
